@@ -1,0 +1,15 @@
+from settings import driver,url
+
+driver.get(url[2])
+driver.maximize_window()
+cookies = driver.get_cookies()
+print("all cookies are \n",cookies)
+driver.add_cookie({"name":"xyz","value":"python"})
+cookies = driver.get_cookies()
+print("all cookies are \n",cookies)
+print(driver.get_cookie('name'))
+driver.delete_cookie("xyz")
+cookies = driver.get_cookies()
+print("all cookies are \n",cookies)
+driver.delete_all_cookies()
+driver.close()
