@@ -1,4 +1,6 @@
 #vidyashree.temp15@gmail.com
+import time
+
 from settings import driver,url
 class FK:
 
@@ -15,7 +17,7 @@ class FK:
 
     def search_products(self):
         page_title = driver.title
-        print(page_title)
+        print("page title is : ",page_title)
         print(driver.current_window_handle)
         print("in search")
         driver.find_element_by_xpath(self.crossBtn).click()
@@ -30,34 +32,36 @@ class FK:
         for i in handles:#[p,c]
             driver.switch_to.window(i)
             title = driver.title
-            print(title)
+            print("title is : ",title)
             if title!=a:
+                print("##########switched######")
                 driver.switch_to.window(i)
 
     def after_search(self):
         print("in after search")
         driver.implicitly_wait(10)
         driver.find_element_by_xpath(self.check_box).click()
+        time.sleep(3)
         driver.find_element_by_xpath(self.mob_xpath).click()
 
     def after_winHandling(self):
         driver.implicitly_wait(10)
         driver.find_element_by_xpath(self.cart).click()
         pagetitle2 = driver.title
-        print(pagetitle2)
+        print("page title 2 is : ",pagetitle2)
         return pagetitle2
 
 
     def loginActivities(self):
         self.get_url()
-        res = self.search_products()
+        page_title = self.search_products()
         import time
         time.sleep(3)
         self.after_search()
-        self.window_handling(res)
-        res2 = self.after_winHandling()
+        self.window_handling(page_title)
+        pagetitle2 = self.after_winHandling()
         time.sleep(3)
-        self.window_handling(res2)
+        self.window_handling(pagetitle2)
 
 
 obj = FK()
